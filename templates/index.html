@@ -6,14 +6,20 @@
     <title>AI Resume Screening</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
     <main class="page">
         <section class="hero">
+            <span class="hero-kicker">Smart Talent Radar</span>
             <h1>AI Resume Screening System</h1>
-            <p>Paste a job description, upload candidate resumes, and get ranked similarity scores instantly.</p>
+            <p>Upload resumes, evaluate fit instantly, and present explainable ranking decisions with confidence.</p>
+            <div class="hero-tags">
+                <span>Weighted Scoring</span>
+                <span>Skill Gap Detection</span>
+                <span>Session History</span>
+            </div>
         </section>
 
         <section class="panel">
@@ -30,7 +36,7 @@
                     <span id="charCount">0 characters</span>
                 </div>
 
-                <div style="margin-top: 20px;">
+                <div class="upload-block">
                     <label for="resumeInput">Upload Resumes (.pdf, .doc, .docx)</label>
                     <input
                         id="resumeInput"
@@ -47,7 +53,7 @@
                     <div class="file-list" id="fileList"></div>
                 </div>
 
-                <div class="actions" style="margin-top: 18px;">
+                <div class="actions action-row">
                     <button type="button" class="btn-secondary" id="pickFiles">Choose Files</button>
                     <button type="button" class="btn-secondary" id="clearFiles">Clear</button>
                     <button type="submit" class="btn-primary" id="submitBtn">Analyze Matches</button>
