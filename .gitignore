@@ -1,0 +1,4 @@
+__pycache__/
+*.pyc
+screening.db
+uploads/candidate.docx

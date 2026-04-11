@@ -24,7 +24,7 @@
                     name="job_description"
                     placeholder="Paste job description here..."
                     required
-                ></textarea>
+                >{{ job_desc or '' }}</textarea>
                 <div class="meta-row">
                     <span class="muted">Tip: add required skills and responsibilities for better ranking.</span>
                     <span id="charCount">0 characters</span>
@@ -56,20 +56,74 @@
 
             {% if results %}
             <section class="results">
-                <h2>Ranked Results</h2>
+                <div class="result-header">
+                    <h2>Ranked Results</h2>
+                    <div class="actions export-actions">
+                        <a class="btn-link" href="{{ url_for('export_csv') }}">Export CSV</a>
+                        <a class="btn-link" href="{{ url_for('export_pdf') }}">Export PDF</a>
+                    </div>
+                </div>
                 {% for r in results %}
                 <article class="result-card">
                     <div class="result-top">
                         <span class="filename">{{ r.name }}</span>
                         <span class="score">{{ r.score }}%</span>
                     </div>
+                    <div class="breakdown-row">
+                        <span>Semantic: <strong>{{ r.semantic_score }}%</strong></span>
+                        <span>Skill Coverage: <strong>{{ r.skill_coverage_score }}%</strong></span>
+                        <span>Decision: <strong>{{ r.recommendation }}</strong></span>
+                    </div>
                     <div class="progress">
                         <span style="--target: {{ r.score }}%;"></span>
+                    </div>
+                    <div class="skill-grid">
+                        <div>
+                            <h4>Matched Skills</h4>
+                            <div class="chip-wrap">
+                                {% if r.matched_skills %}
+                                    {% for skill in r.matched_skills %}
+                                    <span class="chip chip-good">{{ skill }}</span>
+                                    {% endfor %}
+                                {% else %}
+                                    <span class="chip chip-muted">No matched required skills</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div>
+                            <h4>Missing Skills</h4>
+                            <div class="chip-wrap">
+                                {% if r.missing_skills %}
+                                    {% for skill in r.missing_skills %}
+                                    <span class="chip chip-warn">{{ skill }}</span>
+                                    {% endfor %}
+                                {% else %}
+                                    <span class="chip chip-good">No missing required skills</span>
+                                {% endif %}
+                            </div>
+                        </div>
                     </div>
                 </article>
                 {% endfor %}
             </section>
             {% endif %}
+
+            <section class="history">
+                <h3>Recent Sessions</h3>
+                {% if recent_sessions %}
+                    <div class="history-list">
+                        {% for item in recent_sessions %}
+                        <a class="history-item {% if selected_session == item.id %}active{% endif %}" href="{{ url_for('index', session_id=item.id) }}">
+                            <span>Session #{{ item.id }}</span>
+                            <span>{{ item.candidate_count }} candidate(s)</span>
+                            <span>{{ item.created_at }}</span>
+                        </a>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="muted">No previous sessions found yet.</p>
+                {% endif %}
+            </section>
         </section>
 
         <div class="footer-note">Created by Kartik Shrivastava</div>
