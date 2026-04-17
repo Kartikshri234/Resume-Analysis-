@@ -1,0 +1,51 @@
+@media (max-width: 860px) {
+    .page {
+        width: min(960px, 94vw);
+    }
+
+    .panel {
+        padding: 22px;
+    }
+
+    .skill-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .info-grid,
+    .info-grid.two-col {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 660px) {
+    .page {
+        margin: 18px auto 24px;
+    }
+
+    .hero-tags {
+        gap: 8px;
+    }
+
+    .actions {
+        flex-direction: column;
+    }
+
+    button,
+    .btn-link {
+        width: 100%;
+    }
+
+    .meta-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .top-nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .top-nav .theme-toggle {
+        width: auto;
+    }
+}

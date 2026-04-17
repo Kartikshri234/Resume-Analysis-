@@ -1,0 +1,60 @@
+:root {
+    --bg: #0f172a;
+    --bg-soft: #111b34;
+    --surface: rgba(16, 25, 48, 0.72);
+    --surface-strong: #162444;
+    --card: rgba(18, 31, 58, 0.92);
+    --text: #eef4ff;
+    --muted: #adc2e4;
+    --primary: #1ec8a5;
+    --primary-strong: #0ea380;
+    --secondary: #31a9ff;
+    --accent: #ffbf47;
+    --border: rgba(153, 184, 231, 0.25);
+    --good: #45dd91;
+    --warn: #ff8e5a;
+    --shadow: 0 28px 70px rgba(2, 8, 23, 0.5);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    color: var(--text);
+    font-family: "Plus Jakarta Sans", "Segoe UI", sans-serif;
+    min-height: 100vh;
+    background:
+        radial-gradient(520px 360px at 8% 6%, rgba(30, 200, 165, 0.2) 0%, transparent 58%),
+        radial-gradient(480px 300px at 92% 10%, rgba(49, 169, 255, 0.2) 0%, transparent 55%),
+        radial-gradient(420px 320px at 88% 88%, rgba(255, 191, 71, 0.12) 0%, transparent 60%),
+        linear-gradient(145deg, #0b1328 0%, #121b35 48%, #0f1b30 100%);
+    overflow-x: hidden;
+}
+
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    pointer-events: none;
+    border-radius: 50%;
+    filter: blur(60px);
+    z-index: -1;
+}
+
+body::before {
+    width: 360px;
+    height: 360px;
+    left: -120px;
+    top: 20%;
+    background: rgba(49, 169, 255, 0.2);
+}
+
+body::after {
+    width: 320px;
+    height: 320px;
+    right: -110px;
+    bottom: 12%;
+    background: rgba(30, 200, 165, 0.24);
+}

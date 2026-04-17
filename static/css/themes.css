@@ -1,0 +1,134 @@
+html[data-theme="light"] {
+    --text: #13243d;
+    --muted: #506785;
+    --border: rgba(76, 111, 159, 0.25);
+    --shadow: 0 24px 54px rgba(68, 88, 116, 0.18);
+}
+
+html[data-theme="light"] body {
+    background:
+        radial-gradient(520px 360px at 8% 6%, rgba(30, 200, 165, 0.14) 0%, transparent 58%),
+        radial-gradient(480px 300px at 92% 10%, rgba(49, 169, 255, 0.14) 0%, transparent 55%),
+        radial-gradient(420px 320px at 88% 88%, rgba(255, 191, 71, 0.11) 0%, transparent 60%),
+        linear-gradient(145deg, #eef5ff 0%, #f7fbff 48%, #ecf3ff 100%);
+}
+
+html[data-theme="light"] body::before {
+    background: rgba(49, 169, 255, 0.13);
+}
+
+html[data-theme="light"] body::after {
+    background: rgba(30, 200, 165, 0.15);
+}
+
+html[data-theme="light"] .top-nav {
+    border-color: rgba(117, 149, 194, 0.3);
+    background: rgba(255, 255, 255, 0.78);
+}
+
+html[data-theme="light"] .brand {
+    color: #10213b;
+}
+
+html[data-theme="light"] .nav-links a {
+    color: #244166;
+    border-color: rgba(105, 141, 191, 0.3);
+    background: rgba(237, 245, 255, 0.95);
+}
+
+html[data-theme="light"] .nav-links a.active {
+    color: #ffffff;
+    border-color: rgba(23, 145, 117, 0.42);
+    background: linear-gradient(135deg, #28b894, #1aa883);
+}
+
+html[data-theme="light"] .theme-toggle {
+    color: #1f3b61;
+    border-color: rgba(102, 137, 182, 0.35);
+    background: rgba(238, 246, 255, 0.95);
+}
+
+html[data-theme="light"] .hero-kicker {
+    color: #0b6d58;
+    background: rgba(30, 200, 165, 0.14);
+    border-color: rgba(24, 170, 136, 0.35);
+}
+
+html[data-theme="light"] .hero-tags span {
+    color: #31516f;
+    background: rgba(242, 248, 255, 0.96);
+    border-color: rgba(133, 165, 211, 0.32);
+}
+
+html[data-theme="light"] .panel {
+    background: linear-gradient(155deg, rgba(255, 255, 255, 0.93), rgba(245, 251, 255, 0.93));
+}
+
+html[data-theme="light"] label {
+    color: #1f3a5e;
+}
+
+html[data-theme="light"] textarea,
+html[data-theme="light"] input[type="text"],
+html[data-theme="light"] input[type="email"] {
+    border-color: rgba(117, 149, 194, 0.4);
+    color: #1b3352;
+    background: linear-gradient(160deg, rgba(248, 252, 255, 0.98), rgba(240, 247, 255, 0.98));
+}
+
+html[data-theme="light"] textarea::placeholder {
+    color: #7690b3;
+}
+
+html[data-theme="light"] .dropzone {
+    border-color: rgba(110, 148, 194, 0.55);
+    background: linear-gradient(140deg, rgba(245, 251, 255, 0.98), rgba(236, 245, 255, 0.95));
+}
+
+html[data-theme="light"] .dropzone strong {
+    color: #204067;
+}
+
+html[data-theme="light"] .file-chip {
+    color: #244a74;
+    border-color: rgba(77, 145, 220, 0.4);
+    background: rgba(116, 173, 238, 0.15);
+}
+
+html[data-theme="light"] .btn-secondary {
+    color: #214266;
+    background: linear-gradient(135deg, #edf4ff, #dfeeff);
+    border-color: rgba(120, 153, 198, 0.45);
+}
+
+html[data-theme="light"] .result-card,
+html[data-theme="light"] .info-card,
+html[data-theme="light"] .history-item {
+    border-color: rgba(115, 148, 191, 0.35);
+    background: linear-gradient(155deg, rgba(251, 255, 255, 0.96), rgba(240, 248, 255, 0.96));
+    box-shadow: inset 0 0 0 1px rgba(164, 192, 232, 0.14);
+}
+
+html[data-theme="light"] .filename,
+html[data-theme="light"] .breakdown-row strong,
+html[data-theme="light"] .big-stat,
+html[data-theme="light"] .history-item,
+html[data-theme="light"] .styled-list,
+html[data-theme="light"] .info-card p {
+    color: #1f3a5e;
+}
+
+html[data-theme="light"] .breakdown-row,
+html[data-theme="light"] .skill-grid h4,
+html[data-theme="light"] .footer-note {
+    color: #587397;
+}
+
+html[data-theme="light"] .history {
+    border-top-color: rgba(121, 154, 197, 0.38);
+}
+
+html[data-theme="light"] .history-item.active {
+    border-color: rgba(30, 172, 140, 0.7);
+    background: linear-gradient(155deg, rgba(236, 255, 250, 0.95), rgba(223, 248, 240, 0.95));
+}
