@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero compact-hero">
+    <span class="hero-kicker">Project Overview</span>
+    <h1>About This Project</h1>
+    <p>This Flask application helps teams screen resumes faster using semantic matching and skill-coverage analysis.</p>
+</section>
+
+<section class="panel">
+    <div class="info-grid">
+        <article class="info-card">
+            <h3>Known Skills</h3>
+            <p class="big-stat">{{ stats.known_skills }}</p>
+            <p>Built-in skill keywords currently used for coverage checks.</p>
+        </article>
+        <article class="info-card">
+            <h3>Recent Sessions</h3>
+            <p class="big-stat">{{ stats.recent_sessions }}</p>
+            <p>Recently stored screening sessions available in history.</p>
+        </article>
+        <article class="info-card">
+            <h3>Uploaded Files</h3>
+            <p class="big-stat">{{ stats.uploaded_files }}</p>
+            <p>Total resumes currently available inside uploads.</p>
+        </article>
+    </div>
+
+    <section class="content-block">
+        <h2>Core Features</h2>
+        <ul class="styled-list">
+            <li>TF-IDF and cosine similarity ranking for each resume.</li>
+            <li>Skill extraction with matched and missing skill visibility.</li>
+            <li>Export options for CSV and PDF reports.</li>
+            <li>Session history to revisit earlier screening runs.</li>
+        </ul>
+    </section>
+</section>
+{% endblock %}

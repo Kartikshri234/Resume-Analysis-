@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero compact-hero">
+    <span class="hero-kicker">User Interaction</span>
+    <h1>Contact / Feedback</h1>
+    <p>Send a short message from the frontend to the Python backend using this connected form.</p>
+</section>
+
+<section class="panel">
+    <section class="content-block">
+        <h2>Message Form</h2>
+        <form method="POST" class="contact-form">
+            <label for="name">Name</label>
+            <input id="name" type="text" name="name" value="{{ form_data.name }}" placeholder="Enter your name" required>
+
+            <label for="email">Email</label>
+            <input id="email" type="email" name="email" value="{{ form_data.email }}" placeholder="Enter your email" required>
+
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Type your feedback or request" required>{{ form_data.message }}</textarea>
+
+            <button type="submit" class="btn-primary">Send Message</button>
+        </form>
+
+        {% if submitted %}
+        <div class="submit-note success">
+            Message received by Python backend for <strong>{{ form_data.name }}</strong> ({{ form_data.email }}).
+        </div>
+        {% elif form_data.name or form_data.email or form_data.message %}
+        <div class="submit-note warning">
+            Please fill all fields before submitting the form.
+        </div>
+        {% endif %}
+    </section>
+</section>
+{% endblock %}

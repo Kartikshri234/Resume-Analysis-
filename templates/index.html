@@ -1,140 +1,128 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Resume Screening</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
-<body>
-    <main class="page">
-        <section class="hero">
-            <span class="hero-kicker">Smart Talent Radar</span>
-            <h1>AI Resume Screening System</h1>
-            <p>Upload resumes, evaluate fit instantly, and present explainable ranking decisions with confidence.</p>
-            <div class="hero-tags">
-                <span>Weighted Scoring</span>
-                <span>Skill Gap Detection</span>
-                <span>Session History</span>
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero">
+    <span class="hero-kicker">Smart Talent Radar</span>
+    <h1>AI Resume Screening System</h1>
+    <p>Upload resumes, evaluate fit instantly, and present explainable ranking decisions with confidence.</p>
+    <div class="hero-tags">
+        <span>Weighted Scoring</span>
+        <span>Skill Gap Detection</span>
+        <span>Session History</span>
+    </div>
+</section>
+
+<section class="panel">
+    <form method="POST" enctype="multipart/form-data">
+        <label for="jobDescription">Job Description</label>
+        <textarea
+            id="jobDescription"
+            name="job_description"
+            placeholder="Paste job description here..."
+            required
+        >{{ job_desc or '' }}</textarea>
+        <div class="meta-row">
+            <span class="muted">Tip: add required skills and responsibilities for better ranking.</span>
+            <span id="charCount">0 characters</span>
+        </div>
+
+        <div class="upload-block">
+            <label for="resumeInput">Upload Resumes (.pdf, .doc, .docx)</label>
+            <input
+                id="resumeInput"
+                class="hidden-input"
+                type="file"
+                name="resumes"
+                accept=".pdf,.doc,.docx"
+                multiple
+            >
+            <div class="dropzone" id="dropzone" role="button" tabindex="0" aria-label="Upload resumes">
+                <strong>Drag and drop files here</strong><br>
+                <span class="muted">or click to browse multiple resumes</span>
             </div>
-        </section>
+            <div class="file-list" id="fileList"></div>
+        </div>
 
-        <section class="panel">
-            <form method="POST" enctype="multipart/form-data">
-                <label for="jobDescription">Job Description</label>
-                <textarea
-                    id="jobDescription"
-                    name="job_description"
-                    placeholder="Paste job description here..."
-                    required
-                >{{ job_desc or '' }}</textarea>
-                <div class="meta-row">
-                    <span class="muted">Tip: add required skills and responsibilities for better ranking.</span>
-                    <span id="charCount">0 characters</span>
-                </div>
+        <div class="actions action-row">
+            <button type="button" class="btn-secondary" id="pickFiles">Choose Files</button>
+            <button type="button" class="btn-secondary" id="clearFiles">Clear</button>
+            <button type="submit" class="btn-primary" id="submitBtn">Analyze Matches</button>
+        </div>
+    </form>
 
-                <div class="upload-block">
-                    <label for="resumeInput">Upload Resumes (.pdf, .doc, .docx)</label>
-                    <input
-                        id="resumeInput"
-                        class="hidden-input"
-                        type="file"
-                        name="resumes"
-                        accept=".pdf,.doc,.docx"
-                        multiple
-                    >
-                    <div class="dropzone" id="dropzone" role="button" tabindex="0" aria-label="Upload resumes">
-                        <strong>Drag and drop files here</strong><br>
-                        <span class="muted">or click to browse multiple resumes</span>
-                    </div>
-                    <div class="file-list" id="fileList"></div>
-                </div>
-
-                <div class="actions action-row">
-                    <button type="button" class="btn-secondary" id="pickFiles">Choose Files</button>
-                    <button type="button" class="btn-secondary" id="clearFiles">Clear</button>
-                    <button type="submit" class="btn-primary" id="submitBtn">Analyze Matches</button>
-                </div>
-            </form>
-
-            {% if results %}
-            <section class="results">
-                <div class="result-header">
-                    <h2>Ranked Results</h2>
-                    <div class="actions export-actions">
-                        <a class="btn-link" href="{{ url_for('export_csv') }}">Export CSV</a>
-                        <a class="btn-link" href="{{ url_for('export_pdf') }}">Export PDF</a>
+    {% if results %}
+    <section class="results">
+        <div class="result-header">
+            <h2>Ranked Results</h2>
+            <div class="actions export-actions">
+                <a class="btn-link" href="{{ url_for('export_csv') }}">Export CSV</a>
+                <a class="btn-link" href="{{ url_for('export_pdf') }}">Export PDF</a>
+            </div>
+        </div>
+        {% for r in results %}
+        <article class="result-card">
+            <div class="result-top">
+                <span class="filename">{{ r.name }}</span>
+                <span class="score">{{ r.score }}%</span>
+            </div>
+            <div class="breakdown-row">
+                <span>Semantic: <strong>{{ r.semantic_score }}%</strong></span>
+                <span>Skill Coverage: <strong>{{ r.skill_coverage_score }}%</strong></span>
+                <span>Decision: <strong>{{ r.recommendation }}</strong></span>
+            </div>
+            <div class="progress">
+                <span style="--target: {{ r.score }}%;"></span>
+            </div>
+            <div class="skill-grid">
+                <div>
+                    <h4>Matched Skills</h4>
+                    <div class="chip-wrap">
+                        {% if r.matched_skills %}
+                            {% for skill in r.matched_skills %}
+                            <span class="chip chip-good">{{ skill }}</span>
+                            {% endfor %}
+                        {% else %}
+                            <span class="chip chip-muted">No matched required skills</span>
+                        {% endif %}
                     </div>
                 </div>
-                {% for r in results %}
-                <article class="result-card">
-                    <div class="result-top">
-                        <span class="filename">{{ r.name }}</span>
-                        <span class="score">{{ r.score }}%</span>
+                <div>
+                    <h4>Missing Skills</h4>
+                    <div class="chip-wrap">
+                        {% if r.missing_skills %}
+                            {% for skill in r.missing_skills %}
+                            <span class="chip chip-warn">{{ skill }}</span>
+                            {% endfor %}
+                        {% else %}
+                            <span class="chip chip-good">No missing required skills</span>
+                        {% endif %}
                     </div>
-                    <div class="breakdown-row">
-                        <span>Semantic: <strong>{{ r.semantic_score }}%</strong></span>
-                        <span>Skill Coverage: <strong>{{ r.skill_coverage_score }}%</strong></span>
-                        <span>Decision: <strong>{{ r.recommendation }}</strong></span>
-                    </div>
-                    <div class="progress">
-                        <span style="--target: {{ r.score }}%;"></span>
-                    </div>
-                    <div class="skill-grid">
-                        <div>
-                            <h4>Matched Skills</h4>
-                            <div class="chip-wrap">
-                                {% if r.matched_skills %}
-                                    {% for skill in r.matched_skills %}
-                                    <span class="chip chip-good">{{ skill }}</span>
-                                    {% endfor %}
-                                {% else %}
-                                    <span class="chip chip-muted">No matched required skills</span>
-                                {% endif %}
-                            </div>
-                        </div>
-                        <div>
-                            <h4>Missing Skills</h4>
-                            <div class="chip-wrap">
-                                {% if r.missing_skills %}
-                                    {% for skill in r.missing_skills %}
-                                    <span class="chip chip-warn">{{ skill }}</span>
-                                    {% endfor %}
-                                {% else %}
-                                    <span class="chip chip-good">No missing required skills</span>
-                                {% endif %}
-                            </div>
-                        </div>
-                    </div>
-                </article>
+                </div>
+            </div>
+        </article>
+        {% endfor %}
+    </section>
+    {% endif %}
+
+    <section class="history">
+        <h3>Recent Sessions</h3>
+        {% if recent_sessions %}
+            <div class="history-list">
+                {% for item in recent_sessions %}
+                <a class="history-item {% if selected_session == item.id %}active{% endif %}" href="{{ url_for('index', session_id=item.id) }}">
+                    <span>Session #{{ item.id }}</span>
+                    <span>{{ item.candidate_count }} candidate(s)</span>
+                    <span>{{ item.created_at }}</span>
+                </a>
                 {% endfor %}
-            </section>
-            {% endif %}
+            </div>
+        {% else %}
+            <p class="muted">No previous sessions found yet.</p>
+        {% endif %}
+    </section>
+</section>
+{% endblock %}
 
-            <section class="history">
-                <h3>Recent Sessions</h3>
-                {% if recent_sessions %}
-                    <div class="history-list">
-                        {% for item in recent_sessions %}
-                        <a class="history-item {% if selected_session == item.id %}active{% endif %}" href="{{ url_for('index', session_id=item.id) }}">
-                            <span>Session #{{ item.id }}</span>
-                            <span>{{ item.candidate_count }} candidate(s)</span>
-                            <span>{{ item.created_at }}</span>
-                        </a>
-                        {% endfor %}
-                    </div>
-                {% else %}
-                    <p class="muted">No previous sessions found yet.</p>
-                {% endif %}
-            </section>
-        </section>
-
-        <div class="footer-note">Created by Kartik Shrivastava</div>
-    </main>
-
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-</body>
-</html>
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% endblock %}

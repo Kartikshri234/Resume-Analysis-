@@ -14,11 +14,12 @@ Recruiters and hiring teams often review many resumes for a single role. This pr
 
 The UI is optimized for demo/showcase use:
 
-- Clean, responsive single-page interface
+- Clean, responsive multi-page interface
 - Drag-and-drop multi-file resume upload
 - File chips for selected files
 - Real-time character count for job description
 - Score bars and sorted ranking cards
+- Dedicated pages for Project overview, User guide, and Contact form
 
 ## Tech Stack
 
@@ -42,10 +43,21 @@ NEW MINOR PROJECT/
 |   `-- js/
 |       `-- main.js
 |-- templates/
-|   `-- index.html
+|   |-- base.html
+|   |-- contact.html
+|   |-- index.html
+|   |-- project.html
+|   `-- user.html
 `-- uploads/
     `-- computer-engineering-resume-example.pdf
 ```
+
+## Available Pages
+
+- `/` - Home page for resume screening workflow
+- `/project` - Project information and live app stats
+- `/user` - User guide and recommendation scale
+- `/contact` - Frontend form connected to Python backend
 
 ## How It Works
 

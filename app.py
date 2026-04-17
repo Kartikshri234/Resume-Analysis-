@@ -332,6 +332,49 @@ def index():
         job_desc=job_desc,
         recent_sessions=recent_sessions,
         selected_session=selected_session,
+        page_title="Home",
+    )
+
+
+@app.route("/project")
+def project_page():
+    stats = {
+        "known_skills": len(SKILL_KEYWORDS),
+        "recent_sessions": len(get_recent_sessions()),
+        "uploaded_files": len(os.listdir(UPLOAD_FOLDER)) if os.path.exists(UPLOAD_FOLDER) else 0,
+    }
+    return render_template("project.html", stats=stats, page_title="Project")
+
+
+@app.route("/user")
+def user_page():
+    quick_steps = [
+        "Open Home and paste a detailed job description.",
+        "Upload multiple PDF/DOCX resumes.",
+        "Click Analyze Matches to generate ranked results.",
+        "Review skill gaps and export CSV/PDF reports.",
+    ]
+    return render_template("user.html", quick_steps=quick_steps, page_title="User Guide")
+
+
+@app.route("/contact", methods=["GET", "POST"])
+def contact_page():
+    submitted = False
+    form_data = {"name": "", "email": "", "message": ""}
+
+    if request.method == "POST":
+        form_data = {
+            "name": request.form.get("name", "").strip(),
+            "email": request.form.get("email", "").strip(),
+            "message": request.form.get("message", "").strip(),
+        }
+        submitted = all(form_data.values())
+
+    return render_template(
+        "contact.html",
+        submitted=submitted,
+        form_data=form_data,
+        page_title="Contact",
     )
 
 if __name__ == "__main__":

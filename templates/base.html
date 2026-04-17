@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page_title or 'AI Resume Screening' }} | AI Resume Screening</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <main class="page">
+        <header class="top-nav">
+            <a class="brand" href="{{ url_for('index') }}">ResumeAI</a>
+            <nav class="nav-links">
+                <a href="{{ url_for('index') }}" class="{% if request.endpoint == 'index' %}active{% endif %}">Home</a>
+                <a href="{{ url_for('project_page') }}" class="{% if request.endpoint == 'project_page' %}active{% endif %}">Project</a>
+                <a href="{{ url_for('user_page') }}" class="{% if request.endpoint == 'user_page' %}active{% endif %}">User Guide</a>
+                <a href="{{ url_for('contact_page') }}" class="{% if request.endpoint == 'contact_page' %}active{% endif %}">Contact</a>
+            </nav>
+        </header>
+
+        {% block content %}{% endblock %}
+
+        <div class="footer-note">Created by Kartik Shrivastava</div>
+    </main>
+
+    {% block scripts %}{% endblock %}
+</body>
+</html>

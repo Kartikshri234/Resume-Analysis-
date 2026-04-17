@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero compact-hero">
+    <span class="hero-kicker">User Space</span>
+    <h1>User Guide</h1>
+    <p>Follow these steps to use the platform effectively and get better resume ranking quality.</p>
+</section>
+
+<section class="panel">
+    <section class="content-block">
+        <h2>Quick Start</h2>
+        <ol class="styled-list ordered">
+            {% for step in quick_steps %}
+            <li>{{ step }}</li>
+            {% endfor %}
+        </ol>
+    </section>
+
+    <div class="info-grid two-col">
+        <article class="info-card">
+            <h3>Tips for Better Results</h3>
+            <ul class="styled-list">
+                <li>Add required technologies and responsibilities in the job description.</li>
+                <li>Upload clean, text-readable resumes for better extraction quality.</li>
+                <li>Use multiple resumes together to compare rankings side by side.</li>
+            </ul>
+        </article>
+        <article class="info-card">
+            <h3>Recommendation Scale</h3>
+            <ul class="styled-list">
+                <li>75% and above: Shortlist</li>
+                <li>50% to 74.99%: Consider</li>
+                <li>Below 50%: Reject</li>
+            </ul>
+        </article>
+    </div>
+</section>
+{% endblock %}

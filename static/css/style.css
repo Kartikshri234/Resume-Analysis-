@@ -65,6 +65,58 @@ body::after {
     position: relative;
 }
 
+.top-nav {
+    margin-bottom: 22px;
+    padding: 12px 14px;
+    border: 1px solid rgba(153, 184, 231, 0.22);
+    border-radius: 14px;
+    background: rgba(13, 23, 45, 0.84);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+.brand {
+    text-decoration: none;
+    font-family: "Syne", "Plus Jakarta Sans", sans-serif;
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #f0fbff;
+    letter-spacing: 0.02em;
+}
+
+.nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #d5e8ff;
+    padding: 7px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(147, 178, 224, 0.18);
+    background: rgba(30, 47, 79, 0.7);
+    font-size: 0.83rem;
+    font-weight: 700;
+    transition: transform 0.15s, border-color 0.15s, background 0.15s;
+}
+
+.nav-links a:hover {
+    transform: translateY(-1px);
+    border-color: rgba(49, 169, 255, 0.5);
+}
+
+.nav-links a.active {
+    color: #072117;
+    border-color: rgba(36, 223, 184, 0.5);
+    background: linear-gradient(135deg, #3ae5c1, #20cda8);
+}
+
 .hero {
     text-align: center;
     margin-bottom: 28px;
@@ -170,6 +222,26 @@ textarea:focus {
     border-color: rgba(30, 200, 165, 0.9);
     box-shadow: 0 0 0 4px rgba(30, 200, 165, 0.14);
     transform: translateY(-1px);
+}
+
+input[type="text"],
+input[type="email"] {
+    width: 100%;
+    border-radius: 12px;
+    border: 1px solid rgba(160, 191, 240, 0.35);
+    background: linear-gradient(160deg, rgba(19, 34, 63, 0.95), rgba(12, 23, 45, 0.98));
+    color: #f0f6ff;
+    padding: 12px;
+    font: inherit;
+    margin-bottom: 14px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus {
+    outline: none;
+    border-color: rgba(30, 200, 165, 0.9);
+    box-shadow: 0 0 0 4px rgba(30, 200, 165, 0.14);
 }
 
 .meta-row {
@@ -452,6 +524,91 @@ button:disabled {
     background: rgba(19, 53, 68, 0.9);
 }
 
+.compact-hero {
+    margin-bottom: 18px;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.info-grid.two-col {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.info-card {
+    border: 1px solid rgba(159, 192, 240, 0.25);
+    border-radius: 14px;
+    padding: 14px;
+    background: linear-gradient(155deg, rgba(21, 34, 63, 0.96), rgba(16, 28, 52, 0.94));
+}
+
+.info-card h3 {
+    margin: 0 0 8px;
+    font-size: 1.05rem;
+    font-family: "Syne", "Plus Jakarta Sans", sans-serif;
+}
+
+.info-card p {
+    margin: 0;
+    color: #bfd3f3;
+    line-height: 1.6;
+}
+
+.big-stat {
+    margin: 3px 0 8px;
+    font-size: 1.95rem;
+    color: #e9fbff;
+    font-weight: 800;
+}
+
+.content-block h2 {
+    margin: 0 0 10px;
+    font-family: "Syne", "Plus Jakarta Sans", sans-serif;
+}
+
+.styled-list {
+    margin: 0;
+    padding-left: 20px;
+    color: #d5e5fb;
+    line-height: 1.7;
+}
+
+.styled-list.ordered {
+    list-style: decimal;
+}
+
+.contact-form {
+    display: grid;
+    gap: 0;
+}
+
+.contact-form textarea {
+    min-height: 130px;
+}
+
+.submit-note {
+    margin-top: 14px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    border: 1px solid transparent;
+    font-size: 0.9rem;
+}
+
+.submit-note.success {
+    color: #d8ffea;
+    border-color: rgba(91, 234, 167, 0.42);
+    background: rgba(69, 221, 145, 0.15);
+}
+
+.submit-note.warning {
+    color: #ffe9db;
+    border-color: rgba(255, 142, 90, 0.44);
+    background: rgba(255, 142, 90, 0.15);
+}
+
 .footer-note {
     margin-top: 22px;
     text-align: right;
@@ -513,6 +670,11 @@ button:disabled {
     .skill-grid {
         grid-template-columns: 1fr;
     }
+
+    .info-grid,
+    .info-grid.two-col {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media (max-width: 660px) {
@@ -534,6 +696,11 @@ button:disabled {
     }
 
     .meta-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .top-nav {
         flex-direction: column;
         align-items: flex-start;
     }
